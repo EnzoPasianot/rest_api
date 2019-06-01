@@ -18,5 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::namespace('API')->name('api.')->group(function(){
-    Route::get('/players', 'PlayersController@index')->name('players');
+    Route::prefix('/players')->group(function(){
+        Route::get('/', 'PlayersController@index')->name('index_players');
+        Route::get('/{id}', 'PlayersController@show')->name('single_players');
+    });
 });
